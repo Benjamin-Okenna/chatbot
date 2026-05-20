@@ -1,0 +1,423 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Core Layout Variables */
+:root {
+    --sidebar-bg: #1e1f22;       /* Dark background */
+    --text-main: #f2f3f5;        /* Light text */
+    --text-muted: #949ba4;       /* Gray text for secondary items */
+    --accent-color: #5865f2;     /* Blurple color for buttons */
+    --hover-bg: #35373c;         /* Background color on hover */
+    --border-color: #2b2d31;     /* Border separating elements */
+}
+
+/* Base resets for the sidebar */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--sidebar-bg);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;      /* Stack items vertically */
+    box-sizing: border-box;
+    border-right: 1px solid var(--border-color);
+}
+
+/* 1. Header Styling */
+.sidebar-header {
+    padding: 16px;
+}
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* 2. Action Button Styling */
+.action-wrapper {
+    padding: 0 16px 12px 16px;
+}
+.new-chat-btn {
+    width: 100%;
+    padding: 10px 14px;
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.new-chat-btn:hover {
+    background-color: var(--hover-bg);
+}
+.new-chat-btn span {
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+/* 3. The History Container (The Scrolling Magic) */
+.history-container {
+    flex: 1;                     /* Tells this section to grow and take up all available vertical space */
+    overflow-y: auto;            /* Enables vertical scrolling ONLY when content overflows */
+    padding: 12px 16px;
+}
+
+.section-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.history-item {
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;         /* Keeps text on a single line */
+    overflow: hidden;            /* Hides long chat titles */
+    text-overflow: ellipsis;     /* Adds "..." to long text cutoffs */
+    margin-bottom: 4px;
+    transition: all 0.2s ease;
+}
+
+.history-item:hover, .history-item.active {
+    background-color: var(--hover-bg);
+    color: var(--text-main);
+}
+
+/* Custom Scrollbar for the History List */
+.history-container::-webkit-scrollbar {
+    width: 4px;
+}
+.history-container::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 4px;
+}
+
+/* 4. Profile Card (Pinned to Bottom) */
+.user-profile-card {
+    padding: 16px;
+    background-color: #111214;   /* Slightly darker backdrop at the base */
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;         /* Aligns avatar and text horizontally */
+    gap: 12px;
+}
+
+.profile-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;          /* Makes the image perfectly round */
+    object-fit: cover;
+    background-color: var(--hover-bg);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.user-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.logout-link {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.1s ease;
+}
+
+.logout-link:hover {
+    color: #f23f43;              /* Subtle red accent color for logout hover */
+}
+
+
+
+/* Color Palette Additions */
+:root {
+    --chat-bg: #313338;          /* Main chat canvas backdrop */
+    --bubble-bot: #2b2d31;       /* Grayish background for the bot bubble */
+    --bubble-user: #5865f2;      /* Indigo/Blue background for the user bubble */
+    --input-bg: #383a40;         /* Text area housing backdrop */
+    --card-bg: #2b2d31;          /* Suggestion cards */
+}
+
+/* Master Chat Canvas */
+.chat-area {
+    flex: 1;                     /* Takes up all remaining width next to the sidebar */
+    height: 100vh;
+    background-color: var(--chat-bg);
+    display: flex;
+    flex-direction: column;      /* Stacks Welcome/Feed, and Input vertically */
+    position: relative;
+}
+
+/* ==========================================================================
+   A. Welcome Screen Styling
+   ========================================================================== */
+.welcome-screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 80px; /* Leaves room for input at bottom */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    z-index: 10;
+    background-color: var(--chat-bg);
+    color: var(--text-main);
+    text-align: center;
+}
+
+/* Dynamic utility class to hide the welcome frame via JS when typing starts */
+.welcome-screen.hidden {
+    display: none;
+}
+
+.uni-logo-placeholder {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.welcome-header h1 {
+    font-size: 2rem;
+    margin: 0 0 8px 0;
+}
+
+.welcome-header p {
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto 32px auto;
+    font-size: 0.95rem;
+}
+
+.suggestions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    width: 100%;
+    max-width: 700px;
+}
+
+.suggestion-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: left;
+    cursor: pointer;
+    color: var(--text-main);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.suggestion-card:hover {
+    background-color: var(--hover-bg);
+    transform: translateY(-2px);
+}
+
+.suggestion-card h5 {
+    margin: 0 0 6px 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.suggestion-card p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   B. Message Feed Window Styling
+   ========================================================================== */
+.message-window {
+    flex: 1;                     /* Spans vertically across available space */
+    overflow-y: auto;            /* Native scrolling behavior */
+    padding: 24px;
+    display: flex;
+    flex-direction: column;      /* Message stacks flow downwards */
+    gap: 20px;                   /* Gap between individual messages */
+}
+
+.chat-divider {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    position: relative;
+    margin: 10px 0;
+}
+
+/* Message Wrapper - Handles the Positioning Layout */
+.message-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;              /* Prevents text from spanning across whole screen */
+}
+
+/* The magic properties that separate right and left placement */
+.message-wrapper.bot {
+    align-self: flex-start;      /* Pins message to the LEFT side */
+}
+
+.message-wrapper.user {
+    align-self: flex-end;        /* Pins message to the RIGHT side */
+    align-items: flex-end;
+}
+
+/* The Bubble Bubble Formatting */
+.message-bubble {
+    padding: 12px 16px;
+    font-size: 0.925rem;
+    line-height: 1.5;
+    word-break: break-word;      /* Protects against text overflow */
+}
+
+/* Specific Border Radius tweaks to style distinct conversational sides */
+.bot .message-bubble {
+    background-color: var(--bubble-bot);
+    color: var(--text-main);
+    border-radius: 0px 12px 12px 12px; /* Pointy top-left corner */
+}
+
+.user .message-bubble {
+    background-color: var(--bubble-user);
+    color: #ffffff;
+    border-radius: 12px 0px 12px 12px; /* Pointy top-right corner */
+}
+
+.message-time {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    padding: 0 4px;
+}
+
+/* ==========================================================================
+   C. Input Area Dock Styling
+   ========================================================================== */
+.input-container {
+    padding: 0 24px 20px 24px;
+    background-color: var(--chat-bg);
+}
+
+.input-box-wrapper {
+    display: flex;
+    background-color: var(--input-bg);
+    border-radius: 8px;
+    padding: 6px 12px;
+    align-items: center;
+}
+
+.input-box-wrapper input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    padding: 10px 4px;
+    font-size: 0.95rem;
+}
+
+.input-box-wrapper input:focus {
+    outline: none;               /* Removes generic browser borders on click */
+}
+
+#send-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: filter 0.2s ease;
+}
+
+#send-btn:hover {
+    filter: brightness(1.1);     /* Smoothly brightens button color on hover */
+}
+
+.disclaimer {
+    display: block;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.generalBox{
+  display: flex;
+
+}
+
+
+
+
+.user-profile-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background-color: #0f172a; /* Slightly darker tile frame for contrast */
+    border-radius: 10px;
+    margin-top: auto; /* Pushes the profile card firmly to the bottom of the sidebar */
+    border: 1px solid #334155;
+}
+
+.profile-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* Cuts any image shape into a perfect circle */
+    object-fit: cover;  /* Prevents aspect-ratio stretching */
+    border: 2px solid #3b82f6; /* Accent styling ring around student photo */
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f1f5f9;
+}
+
+.user-matric {
+    font-size: 11px;
+    color: #94a3b8;
+    font-family: monospace;
+}
+
+.logout-link {
+    font-size: 11px;
+    color: #ef4444;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 4px;
+    width: fit-content;
+}
+
+.logout-link:hover {
+    text-decoration: underline;
+}
