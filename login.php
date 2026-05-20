@@ -10,7 +10,7 @@
     <div class="login-container">
         <!-- Brand/Identity Header -->
         <header class="login-header">
-            <div class="bot-icon">🤖</div>
+            <div class="bot-icon"><img src="espoly_icon.jpg" alt="Espoly Logo" width="50px" height="50px" ></div>
             <h1>EspolyBot Portal</h1>
             <p>Sign in with your institutional credentials to access your academic AI advisor.</p>
         </header>

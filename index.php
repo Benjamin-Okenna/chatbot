@@ -104,7 +104,7 @@ $current_session_id = isset($_GET['session_id']) ? intval($_GET['session_id']) :
     <!-- A. WELCOME SCREEN -->
     <div class="welcome-screen" id="welcome-screen">
         <div class="welcome-header">
-            <div class="uni-logo-placeholder">🏫</div>
+            <div class="uni-logo-placeholder"><img src="espoly_icon.jpg" alt="Espoly Logo" width="50px" height="50px" ></div>
             <h1>Welcome to EspolyBot Portal</h1>
             <p>Your instant AI assistant for academic queries, registration rules, and deadlines.</p>
         </div>
